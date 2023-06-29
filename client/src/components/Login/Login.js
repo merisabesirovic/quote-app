@@ -1,17 +1,41 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import "./Login.css";
 import image from "../../assets/quill-pen.png";
 
-const onSubmit = () => {
-  console.log("submitted");
-};
-
 const Form = () => {
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       userName: "",
       password: "",
+    },
+    onSubmit: async (values) => {
+      const { userName, password } = values;
+      const requestBody = {
+        username: userName,
+        password: password,
+      };
+
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/sessions",
+          requestBody
+        );
+        const { accessToken } = response.data;
+
+        const res = await axios.get("http://localhost:8000/quotes", {
+          headers: { Authorization: "Bearer " + accessToken },
+        });
+
+        console.log(res);
+        setLoginSuccess(true);
+      } catch (error) {
+        console.log(error);
+        setLoginSuccess(false);
+      }
     },
   });
 
@@ -45,7 +69,7 @@ const Form = () => {
           <input
             id="password"
             name="password"
-            type="text"
+            type="password"
             className="mt-1 w-80 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
@@ -59,9 +83,15 @@ const Form = () => {
             className="w-80 h-10 mt-1 bg-emerald-950 hover:bg-emerald-900 text-white font-bold rounded-lg
              hoverbg-emerald-900 active:bg-emerald-600 focus:outline-none focus:ring focus:ring-violet-300"
             type="submit"
+            disabled={formik.isSubmitting}
           >
             Submit
           </button>
+          {loginSuccess ? (
+            <p className="text-green-500 mt-4">Login successful!</p>
+          ) : (
+            <p className="text-red-500 mt-4">Invalid credentials</p>
+          )}
         </form>
         <div className="flex items-center">
           <img className="w-48 h-auto" src={image} alt="Background" />
