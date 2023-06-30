@@ -10,7 +10,7 @@ function QuoteCard({ author, content, createdAt, tags }) {
           <footer className="blockquote-footer">
             {author} <cite title="Source Title">{createdAt}</cite>
             {tags.map((e) => (
-              <p>{e}</p>
+              <p>#{e}</p>
             ))}
           </footer>
         </blockquote>
