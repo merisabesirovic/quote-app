@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import QuoteCard from "../../components/QuoteCard/QuoteCard";
+import Navbar from "../../components/Navbar/Navbar";
 
 const accessToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
 
@@ -25,20 +26,23 @@ export default function Main() {
   }, []);
 
   return (
-    <div className="overflow-x-hidden bg-zinc-700 flex-col ">
-      {allQuotes.quotes &&
-        allQuotes.quotes.map((e) => (
-          <QuoteCard
-            key={e.id}
-            author={e.author}
-            createdAt={e.createdAt}
-            content={e.content}
-            tags={e.tags}
-            percentage={Math.floor(
-              (e.upvotesCount / (e.upvotesCount + e.downvotesCount)) * 100
-            )}
-          />
-        ))}
-    </div>
+    <>
+      <Navbar></Navbar>
+      <div className="overflow-x-hidden bg-zinc-700 flex-col ">
+        {allQuotes.quotes &&
+          allQuotes.quotes.map((e) => (
+            <QuoteCard
+              key={e.id}
+              author={e.author}
+              createdAt={e.createdAt}
+              content={e.content}
+              tags={e.tags}
+              percentage={Math.floor(
+                (e.upvotesCount / (e.upvotesCount + e.downvotesCount)) * 100
+              )}
+            />
+          ))}
+      </div>
+    </>
   );
 }
