@@ -6,35 +6,43 @@ import { AppContext } from "../../context/AppContext";
 import { useContext } from "react";
 import PaginationBasic from "../../components/Pagination/Pagination";
 
-// const accessToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
+const accessToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
 
 export default function Main() {
-  //   const [allQuotes, setAllQuotes] = useState({});
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get("http://localhost:8000/quotes", {
-  //           params: {
-  //             pageSize: 3,
-  //             page: 3,
-  //           },
-  //           headers: { Authorization: "Bearer " + accessToken },
-  //         });
-  //         const info = response.data;
-  //         setAllQuotes(info);
-  //         console.log(info);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   }, [accessToken]);
   const { allQuotes, setAllQuotes } = useContext(AppContext);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
+  const handleUpvote = async (id) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/quotes/${id}/upvote`,
+        {},
+        {
+          headers: { Authorization: "Bearer " + accessToken },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
+  const handleDownvote = async (id) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/quotes/${id}/downvote`,
+        {},
+        {
+          headers: { Authorization: "Bearer " + accessToken },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   return (
@@ -45,6 +53,7 @@ export default function Main() {
           allQuotes.quotes.map((e) => (
             <QuoteCard
               key={e.id}
+              id={e.id}
               author={e.author}
               createdAt={e.createdAt}
               content={e.content}
@@ -54,6 +63,8 @@ export default function Main() {
               percentage={Math.floor(
                 (e.upvotesCount / (e.upvotesCount + e.downvotesCount)) * 100
               )}
+              onLike={() => handleUpvote(e.id)}
+              onDislike={() => handleDownvote(e.id)}
             />
           ))}
         <div className="d-flex justify-content-center">

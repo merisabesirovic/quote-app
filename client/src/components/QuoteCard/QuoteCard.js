@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import "../../fonts/fonts.css";
+import * as Icon from "react-bootstrap-icons";
 
 function QuoteCard({
   author,
@@ -10,6 +11,8 @@ function QuoteCard({
   percentage,
   upvotesCount,
   downvotesCount,
+  onLike,
+  onDislike,
 }) {
   const formatDate = (date) => {
     const formattedDate = new Date(date).toLocaleString();
@@ -49,6 +52,20 @@ function QuoteCard({
                   ))}
                 </div>
                 <div>
+                  <div className="d-flex row justify-center gap-5 p-2 mr-2">
+                    <button>
+                      <Icon.HandThumbsUp
+                        onClick={onLike}
+                        size={30}
+                      ></Icon.HandThumbsUp>
+                    </button>
+                    <button>
+                      <Icon.HandThumbsDown
+                        onClick={onDislike}
+                        size={30}
+                      ></Icon.HandThumbsDown>
+                    </button>
+                  </div>
                   <span
                     className={
                       "font-extrabold text-lg" +
