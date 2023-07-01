@@ -56,23 +56,33 @@ function QuoteCard({
                 </div>
                 <div>
                   <div className="d-flex row justify-center gap-5 p-2 mr-2">
-                    <button className="border-none">
-                      {givenVote === "downvote" || givenVote === "none" ? (
-                        <Icon.HandThumbsUp onClick={onLike} size={30} />
-                      ) : (
-                        <Icon.HandThumbsUpFill size={30} onClick={onLike} />
-                      )}
-                    </button>
-                    <button className="border-none">
-                      {givenVote === "upvote" || givenVote === "none" ? (
-                        <Icon.HandThumbsDown onClick={onDislike} size={30} />
-                      ) : (
-                        <Icon.HandThumbsDownFill
-                          onClick={onDislike}
-                          size={30}
-                        />
-                      )}
-                    </button>
+                    {givenVote === "downvote" || givenVote === "none" ? (
+                      <Icon.HandThumbsUp
+                        className="cursor-pointer"
+                        onClick={onLike}
+                        size={30}
+                      />
+                    ) : (
+                      <Icon.HandThumbsUpFill
+                        className="cursor-pointer"
+                        size={30}
+                        onClick={onLike}
+                      />
+                    )}
+
+                    {givenVote === "upvote" || givenVote === "none" ? (
+                      <Icon.HandThumbsDown
+                        className="cursor-pointer"
+                        onClick={onDislike}
+                        size={30}
+                      />
+                    ) : (
+                      <Icon.HandThumbsDownFill
+                        className="cursor-pointer"
+                        onClick={onDislike}
+                        size={30}
+                      />
+                    )}
                   </div>
                   <span
                     className={
