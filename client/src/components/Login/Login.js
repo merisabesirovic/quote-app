@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import "./Login.css";
 import image from "../../assets/quill-pen.png";
+import "../../fonts/fonts.css";
 
 const Form = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -40,7 +41,10 @@ const Form = () => {
   });
 
   return (
-    <div className="flex items-center justify-center h-screen gradient-background">
+    <div
+      style={{ fontFamily: "'Poppins', sans-serif" }}
+      className="flex items-center justify-center h-screen gradient-background"
+    >
       <div className="flex  gap-20 bg-gray-100 bg-opacity-50 p-6 rounded-lg shadow-lg">
         <form
           className="h-80 flex flex-col justify-center items-center gap-3"
@@ -80,7 +84,7 @@ const Form = () => {
             value={formik.values.password}
           />
           <button
-            className="w-80 h-10 mt-1 bg-emerald-950 hover:bg-emerald-900 text-white font-bold rounded-lg
+            className="w-80 h-10 p-1.5 mt-1 bg-emerald-950 hover:bg-emerald-900 text-white font-bold rounded-lg
              hoverbg-emerald-900 active:bg-emerald-600 focus:outline-none focus:ring focus:ring-violet-300"
             type="submit"
             disabled={formik.isSubmitting}

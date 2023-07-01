@@ -34,6 +34,9 @@ export default function Main() {
             createdAt={e.createdAt}
             content={e.content}
             tags={e.tags}
+            percentage={Math.floor(
+              (e.upvotesCount / (e.upvotesCount + e.downvotesCount)) * 100
+            )}
           />
         ))}
     </div>
