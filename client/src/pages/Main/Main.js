@@ -25,7 +25,7 @@ export default function Main() {
   }, []);
 
   return (
-    <div>
+    <div className="overflow-x-hidden bg-zinc-700 flex-col ">
       {allQuotes.quotes &&
         allQuotes.quotes.map((e) => (
           <QuoteCard
