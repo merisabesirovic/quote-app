@@ -2,7 +2,15 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import "../../fonts/fonts.css";
 
-function QuoteCard({ author, content, createdAt, tags, percentage }) {
+function QuoteCard({
+  author,
+  content,
+  createdAt,
+  tags,
+  percentage,
+  upvotesCount,
+  downvotesCount,
+}) {
   const formatDate = (date) => {
     const formattedDate = new Date(date).toLocaleString();
     return formattedDate;
@@ -40,22 +48,27 @@ function QuoteCard({ author, content, createdAt, tags, percentage }) {
                     </p>
                   ))}
                 </div>
-                <span
-                  className={
-                    "font-extrabold text-lg" +
-                    (percentage >= 0 && percentage <= 21
-                      ? " text-orange-600"
-                      : percentage > 21 && percentage <= 45
-                      ? " text-yellow-500"
-                      : percentage > 45 && percentage <= 70
-                      ? " text-lime-300"
-                      : percentage > 70 && percentage <= 100
-                      ? " text-green-700"
-                      : "")
-                  }
-                >
-                  {percentage}%
-                </span>
+                <div>
+                  <span
+                    className={
+                      "font-extrabold text-lg" +
+                      (percentage >= 0 && percentage <= 21
+                        ? " text-orange-600"
+                        : percentage > 21 && percentage <= 45
+                        ? " text-yellow-500"
+                        : percentage > 45 && percentage <= 70
+                        ? " text-lime-300"
+                        : percentage > 70 && percentage <= 100
+                        ? " text-green-700"
+                        : "")
+                    }
+                  >
+                    {percentage}%
+                  </span>
+                  <p>
+                    {upvotesCount}/{downvotesCount}
+                  </p>
+                </div>
               </footer>
             </blockquote>
           </Card.Body>

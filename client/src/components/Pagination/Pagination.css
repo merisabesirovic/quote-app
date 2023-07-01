@@ -1,0 +1,13 @@
+.page-link {
+  background-color: rgb(51, 87, 80);
+  border: 1px solid white;
+  font-weight: bold;
+  color: white;
+}
+.page-item.active .page-link {
+  color: black;
+  background-color: rgb(16, 36, 31);
+  border: 1px solid white;
+  font-weight: bold;
+  color: white;
+}
