@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import QuoteCard from "../../components/QuoteCard/QuoteCard";
 import Navbar from "../../components/Navbar/Navbar";
 import { AppContext } from "../../context/AppContext";
-import { useContext } from "react";
 import PaginationBasic from "../../components/Pagination/Pagination";
 
 const accessToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
@@ -16,33 +15,182 @@ export default function Main() {
   };
 
   const handleUpvote = async (id) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:8000/quotes/${id}/upvote`,
-        {},
-        {
-          headers: { Authorization: "Bearer " + accessToken },
+    let updatedQuotes = [...allQuotes.quotes];
+    updatedQuotes = updatedQuotes.map((quote) => {
+      if (quote.id === id) {
+        if (quote.givenVote === "none") {
+          // Upvoting a quote
+          (async () => {
+            try {
+              const response = await axios.post(
+                `http://localhost:8000/quotes/${id}/upvote`,
+                {},
+                {
+                  headers: { Authorization: "Bearer " + accessToken },
+                }
+              );
+              console.log(response.data);
+              quote.upvotesCount += 1; // Update upvotesCount
+              quote.givenVote = "upvote"; // Update givenVote
+              setAllQuotes((prevQuotes) => ({
+                ...prevQuotes,
+                quotes: updatedQuotes,
+              }));
+            } catch (error) {
+              console.log(error.response.data);
+            }
+          })();
+        } else if (quote.givenVote === "upvote") {
+          // Removing upvote from a quote
+          (async () => {
+            try {
+              const response = await axios.delete(
+                `http://localhost:8000/quotes/${id}/upvote`,
+                {
+                  headers: { Authorization: "Bearer " + accessToken },
+                }
+              );
+              console.log(response.data);
+              quote.upvotesCount -= 1; // Update upvotesCount
+              quote.givenVote = "none"; // Update givenVote
+              setAllQuotes((prevQuotes) => ({
+                ...prevQuotes,
+                quotes: updatedQuotes,
+              }));
+            } catch (error) {
+              console.log(error.response.data);
+            }
+          })();
+        } else if (quote.givenVote === "downvote") {
+          // Changing downvote to upvote on a quote
+          (async () => {
+            try {
+              const response = await axios.delete(
+                `http://localhost:8000/quotes/${id}/downvote`,
+                {
+                  headers: { Authorization: "Bearer " + accessToken },
+                }
+              );
+              console.log(response.data);
+            } catch (error) {
+              console.log(error.response.data);
+              return;
+            }
+            try {
+              const response = await axios.post(
+                `http://localhost:8000/quotes/${id}/upvote`,
+                {},
+                {
+                  headers: { Authorization: "Bearer " + accessToken },
+                }
+              );
+              console.log(response.data);
+              quote.upvotesCount += 1; // Update upvotesCount
+              quote.downvotesCount -= 1; // Update downvotesCount
+              quote.givenVote = "upvote"; // Update givenVote
+              setAllQuotes((prevQuotes) => ({
+                ...prevQuotes,
+                quotes: updatedQuotes,
+              }));
+            } catch (error) {
+              console.log(error.response.data);
+            }
+          })();
         }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error.response.data);
-    }
+      }
+      return quote;
+    });
+
+    setAllQuotes((prevQuotes) => ({ ...prevQuotes, quotes: updatedQuotes }));
   };
 
   const handleDownvote = async (id) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:8000/quotes/${id}/downvote`,
-        {},
-        {
-          headers: { Authorization: "Bearer " + accessToken },
+    let updatedQuotes = [...allQuotes.quotes];
+    updatedQuotes = updatedQuotes.map((quote) => {
+      if (quote.id === id) {
+        if (quote.givenVote === "none") {
+          // Downvoting a quote
+          (async () => {
+            try {
+              const response = await axios.post(
+                `http://localhost:8000/quotes/${id}/downvote`,
+                {},
+                {
+                  headers: { Authorization: "Bearer " + accessToken },
+                }
+              );
+              console.log(response.data);
+              quote.downvotesCount += 1; // Update downvotesCount
+              quote.givenVote = "downvote"; // Update givenVote
+              setAllQuotes((prevQuotes) => ({
+                ...prevQuotes,
+                quotes: updatedQuotes,
+              }));
+            } catch (error) {
+              console.log(error.response.data);
+            }
+          })();
+        } else if (quote.givenVote === "downvote") {
+          // Removing downvote from a quote
+          (async () => {
+            try {
+              const response = await axios.delete(
+                `http://localhost:8000/quotes/${id}/downvote`,
+                {
+                  headers: { Authorization: "Bearer " + accessToken },
+                }
+              );
+              console.log(response.data);
+              quote.downvotesCount -= 1; // Update downvotesCount
+              quote.givenVote = "none"; // Update givenVote
+              setAllQuotes((prevQuotes) => ({
+                ...prevQuotes,
+                quotes: updatedQuotes,
+              }));
+            } catch (error) {
+              console.log(error.response.data);
+            }
+          })();
+        } else if (quote.givenVote === "upvote") {
+          // Changing upvote to downvote on a quote
+          (async () => {
+            try {
+              const response = await axios.delete(
+                `http://localhost:8000/quotes/${id}/upvote`,
+                {
+                  headers: { Authorization: "Bearer " + accessToken },
+                }
+              );
+              console.log(response.data);
+              try {
+                const res = await axios.post(
+                  `http://localhost:8000/quotes/${id}/downvote`,
+                  {},
+                  {
+                    headers: { Authorization: "Bearer " + accessToken },
+                  }
+                );
+                console.log(res.data);
+                quote.upvotesCount -= 1;
+                quote.downvotesCount += 1;
+                quote.givenVote = "downvote";
+                setAllQuotes((prevQuotes) => ({
+                  ...prevQuotes,
+                  quotes: updatedQuotes,
+                }));
+              } catch (error) {
+                console.log(error.response.data);
+              }
+            } catch (error) {
+              console.log(error.response.data);
+            }
+          })();
         }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error.response.data);
-    }
+      }
+      return quote;
+    });
+
+    setAllQuotes((prevQuotes) => ({ ...prevQuotes, quotes: updatedQuotes }));
   };
 
   return (
@@ -65,6 +213,7 @@ export default function Main() {
               )}
               onLike={() => handleUpvote(e.id)}
               onDislike={() => handleDownvote(e.id)}
+              givenVote={e.givenVote}
             />
           ))}
         <div className="d-flex justify-content-center">

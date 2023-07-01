@@ -13,6 +13,9 @@ function QuoteCard({
   downvotesCount,
   onLike,
   onDislike,
+  deleteLike,
+  deleteDislike,
+  givenVote,
 }) {
   const formatDate = (date) => {
     const formattedDate = new Date(date).toLocaleString();
@@ -25,7 +28,7 @@ function QuoteCard({
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       <div className="col-lg-6 col-md-8 col-sm-10">
-        <Card className="drop-shadow-lg ">
+        <Card className="drop-shadow-lg">
           <Card.Header className="bg-slate-400 text-white p-2">
             Quote
           </Card.Header>
@@ -53,17 +56,22 @@ function QuoteCard({
                 </div>
                 <div>
                   <div className="d-flex row justify-center gap-5 p-2 mr-2">
-                    <button>
-                      <Icon.HandThumbsUp
-                        onClick={onLike}
-                        size={30}
-                      ></Icon.HandThumbsUp>
+                    <button className="border-none">
+                      {givenVote === "downvote" || givenVote === "none" ? (
+                        <Icon.HandThumbsUp onClick={onLike} size={30} />
+                      ) : (
+                        <Icon.HandThumbsUpFill size={30} onClick={onLike} />
+                      )}
                     </button>
-                    <button>
-                      <Icon.HandThumbsDown
-                        onClick={onDislike}
-                        size={30}
-                      ></Icon.HandThumbsDown>
+                    <button className="border-none">
+                      {givenVote === "upvote" || givenVote === "none" ? (
+                        <Icon.HandThumbsDown onClick={onDislike} size={30} />
+                      ) : (
+                        <Icon.HandThumbsDownFill
+                          onClick={onDislike}
+                          size={30}
+                        />
+                      )}
                     </button>
                   </div>
                   <span
