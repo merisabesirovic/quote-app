@@ -202,9 +202,14 @@ export default function Main() {
               tags={e.tags}
               upvotesCount={e.upvotesCount}
               downvotesCount={e.downvotesCount}
-              percentage={Math.floor(
-                (e.upvotesCount / (e.upvotesCount + e.downvotesCount)) * 100
-              )}
+              percentage={
+                e.upvotesCount === 0 && e.downvotesCount === 0
+                  ? 0
+                  : Math.floor(
+                      (e.upvotesCount / (e.upvotesCount + e.downvotesCount)) *
+                        100
+                    )
+              }
               onLike={() => handleUpvote(e.id)}
               onDislike={() => handleDownvote(e.id)}
               givenVote={e.givenVote}

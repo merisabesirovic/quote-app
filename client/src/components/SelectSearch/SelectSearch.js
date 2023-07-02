@@ -21,11 +21,11 @@ export default function SelectSearch() {
   }, [selectedTags, setAllQuotes]);
 
   useEffect(() => {
-    console.log("Updated allQuotes:", allQuotes);
+    // console.log("Updated allQuotes:", allQuotes);
   }, [allQuotes]);
 
   useEffect(() => {
-    console.log("Updated Tags:", tags);
+    // console.log("Updated Tags:", tags);
   }, [tags]);
 
   const fetchData = async () => {
@@ -37,7 +37,7 @@ export default function SelectSearch() {
         id: index,
         name: tag,
       }));
-      console.log("Tags:", tagsData);
+      //   console.log("Tags:", tagsData);
       setTags(tagsData);
     } catch (err) {
       console.log(err);
