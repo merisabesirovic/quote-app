@@ -8,6 +8,7 @@ function ContextProvider({ children }) {
   const [token, setToken] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [allQuotes, setAllQuotes] = useState({});
+  const [sort, setSort] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -15,6 +16,8 @@ function ContextProvider({ children }) {
         params: {
           pageSize: 3,
           page: pageNum,
+          sortBy: sort[0],
+          sortDirection: sort[1],
         },
         headers: { Authorization: "Bearer " + accessToken },
       });
@@ -28,7 +31,11 @@ function ContextProvider({ children }) {
 
   useEffect(() => {
     fetchData();
-  }, [pageNum, accessToken]);
+  }, [pageNum, sort]);
+
+  const handleSortClick = (sortValue) => {
+    setSort(sortValue);
+  };
 
   const values = {
     token,
@@ -37,6 +44,8 @@ function ContextProvider({ children }) {
     setAllQuotes,
     pageNum,
     setPageNum,
+    sort,
+    handleSortClick,
   };
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

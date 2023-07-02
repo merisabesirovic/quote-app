@@ -19,7 +19,6 @@ export default function Main() {
     updatedQuotes = updatedQuotes.map((quote) => {
       if (quote.id === id) {
         if (quote.givenVote === "none") {
-          // Upvoting a quote
           (async () => {
             try {
               const response = await axios.post(
@@ -30,8 +29,8 @@ export default function Main() {
                 }
               );
               console.log(response.data);
-              quote.upvotesCount += 1; // Update upvotesCount
-              quote.givenVote = "upvote"; // Update givenVote
+              quote.upvotesCount += 1;
+              quote.givenVote = "upvote";
               setAllQuotes((prevQuotes) => ({
                 ...prevQuotes,
                 quotes: updatedQuotes,
@@ -41,7 +40,6 @@ export default function Main() {
             }
           })();
         } else if (quote.givenVote === "upvote") {
-          // Removing upvote from a quote
           (async () => {
             try {
               const response = await axios.delete(
@@ -51,8 +49,8 @@ export default function Main() {
                 }
               );
               console.log(response.data);
-              quote.upvotesCount -= 1; // Update upvotesCount
-              quote.givenVote = "none"; // Update givenVote
+              quote.upvotesCount -= 1;
+              quote.givenVote = "none";
               setAllQuotes((prevQuotes) => ({
                 ...prevQuotes,
                 quotes: updatedQuotes,
@@ -62,7 +60,6 @@ export default function Main() {
             }
           })();
         } else if (quote.givenVote === "downvote") {
-          // Changing downvote to upvote on a quote
           (async () => {
             try {
               const response = await axios.delete(
@@ -85,9 +82,9 @@ export default function Main() {
                 }
               );
               console.log(response.data);
-              quote.upvotesCount += 1; // Update upvotesCount
-              quote.downvotesCount -= 1; // Update downvotesCount
-              quote.givenVote = "upvote"; // Update givenVote
+              quote.upvotesCount += 1;
+              quote.downvotesCount -= 1;
+              quote.givenVote = "upvote";
               setAllQuotes((prevQuotes) => ({
                 ...prevQuotes,
                 quotes: updatedQuotes,
@@ -109,7 +106,6 @@ export default function Main() {
     updatedQuotes = updatedQuotes.map((quote) => {
       if (quote.id === id) {
         if (quote.givenVote === "none") {
-          // Downvoting a quote
           (async () => {
             try {
               const response = await axios.post(
@@ -120,8 +116,8 @@ export default function Main() {
                 }
               );
               console.log(response.data);
-              quote.downvotesCount += 1; // Update downvotesCount
-              quote.givenVote = "downvote"; // Update givenVote
+              quote.downvotesCount += 1;
+              quote.givenVote = "downvote";
               setAllQuotes((prevQuotes) => ({
                 ...prevQuotes,
                 quotes: updatedQuotes,
@@ -131,7 +127,6 @@ export default function Main() {
             }
           })();
         } else if (quote.givenVote === "downvote") {
-          // Removing downvote from a quote
           (async () => {
             try {
               const response = await axios.delete(
@@ -141,8 +136,8 @@ export default function Main() {
                 }
               );
               console.log(response.data);
-              quote.downvotesCount -= 1; // Update downvotesCount
-              quote.givenVote = "none"; // Update givenVote
+              quote.downvotesCount -= 1;
+              quote.givenVote = "none";
               setAllQuotes((prevQuotes) => ({
                 ...prevQuotes,
                 quotes: updatedQuotes,
@@ -152,7 +147,6 @@ export default function Main() {
             }
           })();
         } else if (quote.givenVote === "upvote") {
-          // Changing upvote to downvote on a quote
           (async () => {
             try {
               const response = await axios.delete(
