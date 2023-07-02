@@ -2,7 +2,7 @@ import axios from "axios";
 import Multiselect from "multiselect-react-dropdown";
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-
+import "./SelectSearch.css";
 const accessToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
 
 export default function SelectSearch() {

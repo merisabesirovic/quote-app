@@ -1,0 +1,9 @@
+@import url("../../fonts/fonts.css");
+.multiselect-container .chip {
+  background-color: rgb(21, 68, 42);
+}
+
+.multiselect-container {
+  border: 2px solid rgb(48, 121, 83);
+  border-radius: 5px;
+}
