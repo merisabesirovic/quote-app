@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import React, { createContext, useState, useEffect } from "react";
 
 const AppContext = createContext();
 const accessToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
@@ -9,6 +9,7 @@ function ContextProvider({ children }) {
   const [pageNum, setPageNum] = useState(1);
   const [allQuotes, setAllQuotes] = useState({});
   const [sort, setSort] = useState([]);
+  const [all, setAll] = useState({});
 
   const fetchData = async () => {
     try {
@@ -32,6 +33,22 @@ function ContextProvider({ children }) {
   useEffect(() => {
     fetchData();
   }, [pageNum, sort]);
+  const fetch = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/quotes", {
+        headers: { Authorization: "Bearer " + accessToken },
+      });
+      const info = response.data;
+      setAll(info);
+      console.log(info);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   const handleSortClick = (sortValue) => {
     setSort(sortValue);
@@ -46,6 +63,8 @@ function ContextProvider({ children }) {
     setPageNum,
     sort,
     handleSortClick,
+    all,
+    setAll,
   };
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
