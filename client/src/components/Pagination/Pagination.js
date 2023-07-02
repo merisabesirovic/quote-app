@@ -6,7 +6,8 @@ import "./Pagination.css";
 const PaginationBasic = () => {
   const { allQuotes, setAllQuotes, pageNum, setPageNum } =
     useContext(AppContext);
-  const totalPages = 3;
+  let num = allQuotes.quotesCount / 3;
+  let totalPages = num % 1 !== 0 ? num + 1 : num;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

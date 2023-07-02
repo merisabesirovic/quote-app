@@ -47,16 +47,16 @@ function Example() {
   };
 
   const turnIntoArray = (string) => {
-    if (string.trim() === "") {
-      return [];
-    } else {
-      return string.split(",");
-    }
+    const elements = string.split(",");
+    return elements.map((element) => element.trim());
   };
 
   return (
     <>
-      <Button style={{ backgroundColor: "green" }} onClick={handleShow}>
+      <Button
+        style={{ backgroundColor: "rgb(31, 71, 51)" }}
+        onClick={handleShow}
+      >
         Add your own quote
       </Button>
 
@@ -119,12 +119,15 @@ function Example() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button style={{ backgroundColor: "green" }} onClick={handleClose}>
+          <Button
+            style={{ backgroundColor: "rgb(31, 71, 51)" }}
+            onClick={handleClose}
+          >
             Close
           </Button>
           <Button
             type="submit"
-            style={{ backgroundColor: "green" }}
+            style={{ backgroundColor: "rgb(31, 71, 51)" }}
             onClick={handleSubmit}
           >
             Save Changes
