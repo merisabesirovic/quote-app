@@ -57,7 +57,7 @@ const Form = () => {
           className="h-80 flex flex-col justify-center items-center gap-3"
           onSubmit={formik.handleSubmit}
         >
-          <h1 className="text-5xl font-bold mb-4 text-white">Welcome back!</h1>
+          <h1 className="text-5xl font-bold mb-4 text-white">Welcome back</h1>
           <p className="text-xs font-bold text-emerald-950">
             Fuel your motivation with the quote app's collection of powerful
             quotes.
