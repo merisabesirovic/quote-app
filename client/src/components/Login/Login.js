@@ -52,7 +52,7 @@ const Form = () => {
       style={{ fontFamily: "'Poppins', sans-serif" }}
       className="flex items-center justify-center h-screen gradient-background"
     >
-      <div className="flex  gap-20 bg-gray-100 bg-opacity-50 p-6 rounded-lg shadow-lg">
+      <div className="flex  gap-15 bg-gray-100 bg-opacity-50 p-6 rounded-lg shadow-lg">
         <form
           className="h-80 flex flex-col justify-center items-center gap-3"
           onSubmit={formik.handleSubmit}
