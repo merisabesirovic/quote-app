@@ -57,7 +57,7 @@ function Example() {
         style={{ backgroundColor: "rgb(31, 71, 51)" }}
         onClick={handleShow}
       >
-        Add your own quote
+        + Add your own quote
       </Button>
 
       <Modal show={show} onHide={handleClose}>
