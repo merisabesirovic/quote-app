@@ -20,13 +20,9 @@ export default function SelectSearch() {
     setAllQuotes({ quotes: filteredQuotes });
   }, [selectedTags, setAllQuotes]);
 
-  useEffect(() => {
-    // console.log("Updated allQuotes:", allQuotes);
-  }, [allQuotes]);
+  useEffect(() => {}, [allQuotes]);
 
-  useEffect(() => {
-    // console.log("Updated Tags:", tags);
-  }, [tags]);
+  useEffect(() => {}, [tags]);
 
   const fetchData = async () => {
     try {
@@ -37,7 +33,7 @@ export default function SelectSearch() {
         id: index,
         name: tag,
       }));
-      //   console.log("Tags:", tagsData);
+
       setTags(tagsData);
     } catch (err) {
       console.log(err);
