@@ -12,7 +12,11 @@ function SortMenu() {
 
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle
+        variant="success"
+        id="dropdown-basic"
+        style={{ fontFamily: "'Poppins', sans-serif" }}
+      >
         Sort By
       </Dropdown.Toggle>
 

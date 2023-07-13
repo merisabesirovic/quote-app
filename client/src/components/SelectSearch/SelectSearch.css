@@ -1,6 +1,7 @@
 @import url("../../fonts/fonts.css");
 .multiselect-container .chip {
   background-color: rgb(21, 68, 42);
+  font-family: "'Poppins', sans-serif";
 }
 
 .multiselect-container {

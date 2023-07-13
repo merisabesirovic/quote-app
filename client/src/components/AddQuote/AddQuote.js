@@ -54,7 +54,10 @@ function Example() {
   return (
     <>
       <Button
-        style={{ backgroundColor: "rgb(31, 71, 51)" }}
+        style={{
+          backgroundColor: "rgb(31, 71, 51)",
+          fontFamily: "'Poppins', sans-serif",
+        }}
         onClick={handleShow}
       >
         + Add your own quote
