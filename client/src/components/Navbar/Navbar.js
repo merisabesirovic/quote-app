@@ -19,6 +19,7 @@ export default function Navbar() {
 
       <button
         className="px-4 py-2 bg-emerald-900 text-white font-bold rounded-lg hover:bg-emerald-800 focus:outline-none"
+        style={{ fontFamily: "'Poppins', sans-serif" }}
         onClick={() => {
           localStorage.removeItem("token");
           setToken(null);
