@@ -59,6 +59,7 @@ export default function SelectSearch() {
     <div>
       {tags.length > 0 ? (
         <Multiselect
+          style={{ fontFamily: "'Poppins', sans-serif" }}
           options={tags}
           selectedValues={selectedTags}
           onSelect={handleSelection}
