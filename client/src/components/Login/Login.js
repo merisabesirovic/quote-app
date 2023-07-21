@@ -109,6 +109,6 @@ const Form = () => {
     </div>
   );
 };
-//login form
+//login
 
 export default Form;
