@@ -98,7 +98,7 @@ const Form = () => {
             type="submit"
             disabled={formik.isSubmitting}
           >
-            Submit
+            Log in
           </button>
           {loginSuccess && <p className="text-red-500 mt-4">{loginSuccess}</p>}
         </form>
